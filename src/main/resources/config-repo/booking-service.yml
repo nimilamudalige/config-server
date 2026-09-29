@@ -1,0 +1,31 @@
+server:
+  port: ${SERVER_PORT:8083}
+
+spring:
+  # Spring Boot 4 reads spring.mongodb.uri for the actual MongoClient; keep
+  # spring.data.mongodb.uri set to the same value too (some Spring Data code
+  # paths still read the old key) - see the deployment guide's Part 9.3 gotcha.
+  mongodb:
+    uri: ${MONGODB_URI:mongodb://localhost:27017/pulsefit_booking_db}
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/pulsefit_booking_db}
+
+# Downstream services this microservice calls, resolved via Eureka (logical names)
+services:
+  member-service:
+    name: MEMBER-SERVICE
+  class-service:
+    name: CLASS-SERVICE
+
+# Firestore is used here as an append-only audit trail for booking events,
+# separate from the primary MongoDB store, to demonstrate Firestore usage.
+gcp:
+  project-id: ${GCP_PROJECT_ID:pulsefit-capstone}
+  firestore:
+    enabled: ${FIRESTORE_ENABLED:false}
+    collection: ${FIRESTORE_COLLECTION:booking_audit_logs}
+
+logging:
+  file:
+    name: /var/log/pulsefit/booking-service.log
