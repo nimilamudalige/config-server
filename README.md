@@ -54,5 +54,5 @@ the merged `application.yml` + `member-service.yml` configuration as JSON.
 
 - **Student Name:** Pasan Nimila
 - **Student Number:** 2301692034
-- **Slack Handle:** pasan_nimila (optional)
+- **Slack Handle:** pasan_nimila
 - **GCP Project ID:** pulsefit-capstone
